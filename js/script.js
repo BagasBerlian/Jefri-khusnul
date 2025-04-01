@@ -76,26 +76,48 @@ audioIcon.onclick = function () {
   isPlaying = !isPlaying;
 };
 
-// if (!localStorage.getItem("opened")) {
-//   disableScroll();
-// }
+if (!localStorage.getItem("opened")) {
+  disableScroll();
+}
 
-disableScroll();
+// disableScroll();
 heroObserver.observe(homeElement);
 
 // Form
 window.addEventListener("load", function () {
   const form = document.getElementById("my-form");
+  const submitBtn = document.getElementById("submit-btn");
+  const spinner = document.getElementById("loading-spinner");
+
   form.addEventListener("submit", function (e) {
     e.preventDefault();
+
+    // Tampilkan spinner & disable tombol
+    spinner.classList.remove("d-none");
+    submitBtn.disabled = true;
+
     const data = new FormData(form);
     const action = e.target.action;
+
     fetch(action, {
       method: "POST",
       body: data,
-    }).then(() => {
-      alert("Terima kasih sudah mengisi form kehadiran");
-    });
+    })
+      .then(() => {
+        alert("Terima kasih sudah mengisi form kehadiran");
+
+        // Reset tombol
+        spinner.classList.add("d-none");
+        submitBtn.disabled = false;
+
+        // Optional: reset form
+        form.reset();
+      })
+      .catch(() => {
+        alert("Terjadi kesalahan. Coba lagi.");
+        spinner.classList.add("d-none");
+        submitBtn.disabled = false;
+      });
   });
 });
 
