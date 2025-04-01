@@ -50,7 +50,7 @@ function disableScroll() {
 function enableScroll() {
   window.onscroll = function () {};
   rootElement.style.scrollBehavior = "smooth";
-  // localStorage.setItem('opened', 'true');
+  // localStorage.setItem("opened", "true");
   homeElement.scrollIntoView({ behavior: "smooth", block: "start" });
   playAudio();
 }
@@ -76,8 +76,8 @@ audioIcon.onclick = function () {
   isPlaying = !isPlaying;
 };
 
-// if (!localStorage.getItem('opened')) {
-//     disableScroll();
+// if (!localStorage.getItem("opened")) {
+//   disableScroll();
 // }
 
 disableScroll();
@@ -94,7 +94,7 @@ window.addEventListener("load", function () {
       method: "POST",
       body: data,
     }).then(() => {
-      alert("Success!");
+      alert("Terima kasih sudah mengisi form kehadiran");
     });
   });
 });
